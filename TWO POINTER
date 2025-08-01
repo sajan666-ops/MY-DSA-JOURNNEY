@@ -1,0 +1,153 @@
+TWO POINTER 1/4
+
+So I just saw a video on YT it says about two pointers pointers are the variable that represents  a index of position with in a data structure such as 
+Arrays. Etc..
+
+
+
+It has 3 types
+1. Converging pointer: it is used when we have two pointers in an array. Both at very different end from each other when well run the code they’ll move toward each other till a certain condition is passed or they cross each other. It is used in palindrome situation. 
+2. Parallel pointer: they both start at one point like from beigning or ending . First pointer move till the condition and second will follow first till condition is met. They’ll use at sliding windows 
+3. Trigger based pointer:first we start first element to move till the element we are finding then when it’ll reach certain condition. The second now will start and explore the way the first one made. It’ll use to find the non-zero elements
+
+func isPalindrome(_ s: String) -> Bool {
+    // Step 1: Clean the string
+    let cleaned = Array(s.lowercased().filter { $0.isLetter || $0.isNumber })
+    
+    // Step 2: Initialize pointers
+    var left = 0
+    var right = cleaned.count - 1
+    
+    // Step 3: Loop till pointers meet
+    while left < right {
+        if cleaned[left] != cleaned[right] {
+            return false
+        }
+        // Move pointers inward
+        left += 1
+        right -= 1
+    }
+    return true
+}
+
+// Example usage
+print(isPalindrome("A man, a plan, a canal: Panama")) // true
+print(isPalindrome("race a car")) // false
+
+
+// so as far i know its a function names IsPalinndrome with the s as everything in the string. which will return bool. so in the func there's one array named cleaned which has filter keyword that means either only letters or only alphabets and so be lowercased. so left point = 0 START POINT. right one is will count the cleaaned array to know the elements in it then -1 means itll start moving.then main game till then left is smaller than right like in code LEFT < RIGHT if cleaned left  isnt equal to cleaned right then return false and start the pointers left is at 2nd no.(WILL FOLLOW THE 1st ). right has count of total elements so itll gone till 1 or 0 and left will increase till the lowercased is found. when right reach the end I.E. larger the condition the loop will be break and return true
+
+
+
+
+
+
+
+func lengthOfLongestSubstring(_ s: String) -> Int {
+    var seenChars: [Character: Int] = [:]
+    var left = 0
+    var maxLength = 0
+    
+    for (right, char) in s.enumerated() {
+        if let prevIndex = seenChars[char], prevIndex >= left {
+            left = prevIndex + 1 // Shrink window from left
+        }
+        seenChars[char] = right // Mark this char as seen
+        maxLength = max(maxLength, right - left + 1) // Update max window size
+    }
+    
+    return maxLength
+}
+
+// Example Usage:
+print(lengthOfLongestSubstring("abcabcbb")) // Output: 3 ("abc")
+print(lengthOfLongestSubstring("bbbbb"))    // Output: 1 ("b")
+print(lengthOfLongestSubstring("pwwkew"))   // Output: 3 ("wke")
+
+// so i we can see the name of func is SAJAN IS SEEING BABES IN BIKINI AT CALIFORNIA. 😭😂 jus kidding the name of the func is lengthOfLongestSubstring which has a main character s which is string and return an int. then well some hero's first seenChat this is the no. of time one charachter is seen and then our left pointer which is always 0 juss like brain in me. then maxlength its just like your LENGHT 💀. leave it the the main game the for lop will tell that right is started and will see all charcater in its way. left is following it as you guys follow DANI DANIELS on insta and then it is enumareted.then here come the game if we take prevIndex = seenchar[char] which is char and no. of to be seemed and previndex if bigger than left then left will be increased like viagra has been consumed sorry sorry. then next statement seen char = right mean he seen it and here's the logic that max willbe right - left + 1 TBH wtf is this math. then itll retrun maxlenght and for example code is givven
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2/4 
+func maxArea(_ height: [Int]) -> Int {
+    var left = 0
+    var right = height.count - 1
+    var maxWater = 0
+
+    while left < right {
+        // Calculate area
+        let width = right - left
+        let currentHeight = min(height[left], height[right])
+        let currentArea = width * currentHeight
+
+        // Update max area
+        maxWater = max(maxWater, currentArea)
+
+        // 🔥 Trigger Movement 🔥
+        // Move the pointer which has smaller height
+        if height[left] < height[right] {
+            left += 1 // Trigger: left height is smaller, so move to potentially bigger
+        } else {
+            right -= 1 // Trigger: right height is smaller, so move to potentially bigger
+        }
+    }
+
+    return maxWater
+}
+
+
+
+
+// as far i can see func name is maxArea in which height is main player which is int type also going to return the same type which is INt so in the funnc we have 3 var var left as always 0 then var right which is right = height count -1 as we know as right pointer move this going to be smaller thats why -1 then max water which is also 0 for now then fucking while statement THIS MF IS REASON OF 46 % DIVORCE OF DEVS. so while left is smaller then right this code will be run then after that the logic that width will be be right - left ( BIG - SMALL). then the current height is minimum of height of left then height of right also we going to update the maxwater with that by maxWater = max of maxwater, currentarea then the trigger area the time where the all started then if height left is smaller than height right then increment of 1 in left pointer then after that  else right will be smaller as yours 😂. then after that well return maxwater fuck done
+
+
+day 3/4
+func threeSum(_ nums: [Int]) -> [[Int]] {
+    let nums = nums.sorted()
+    var result: [[Int]] = []
+
+    for i in 0..<nums.count {
+        if i > 0 && nums[i] == nums[i - 1] { continue } // Skip duplicates for i
+        
+        var left = i + 1
+        var right = nums.count - 1
+        
+        while left < right {
+            let sum = nums[i] + nums[left] + nums[right]
+            
+            if sum == 0 {
+                result.append([nums[i], nums[left], nums[right]])
+                left += 1
+                right -= 1
+                
+                // Skip duplicates for left and right
+                while left < right && nums[left] == nums[left - 1] { left += 1 }
+                while left < right && nums[right] == nums[right + 1] { right -= 1 }
+                
+            } else if sum < 0 {
+                left += 1
+            } else {
+                right -= 1
+            }
+        }
+    }
+    
+    return result
+}
+// so as far as i can see first the name of the func threesum😭😭. then the game changer num which is array of int and will return an array of int then well sort num after that. then well use RESULT to represent thaat shit then then for loop with i that go as far as array count then condition that if i is larger thann 0 and i == i-1 so we'll skip it by CONTINUE so that no duplicacy . then we'll assign left right . left will be i + 1 so that itll move forward then right is nums.count -1 so then right can also move forward then while loop says till then left < right in that well use sum as a let keyword then which is I + LEFT + RIGHT in that case the condition is if sum == 0 so we append that 3 values in an array while skipping duplicacy by while statements then if sum is smaller than0 move left ahead otherwise right will move ahead if nothing happens atlast result is returned 
+
+
+
+
+
