@@ -148,6 +148,31 @@ func threeSum(_ nums: [Int]) -> [[Int]] {
 // so as far as i can see first the name of the func threesum😭😭. then the game changer num which is array of int and will return an array of int then well sort num after that. then well use RESULT to represent thaat shit then then for loop with i that go as far as array count then condition that if i is larger thann 0 and i == i-1 so we'll skip it by CONTINUE so that no duplicacy . then we'll assign left right . left will be i + 1 so that itll move forward then right is nums.count -1 so then right can also move forward then while loop says till then left < right in that well use sum as a let keyword then which is I + LEFT + RIGHT in that case the condition is if sum == 0 so we append that 3 values in an array while skipping duplicacy by while statements then if sum is smaller than0 move left ahead otherwise right will move ahead if nothing happens atlast result is returned 
 
 
+day 4/4
+func trap(_ height: [Int]) -> Int {
+    var left = 0
+    var right = height.count - 1
+    var leftMax = 0
+    var rightMax = 0
+    var WaterTrapped = 0
+    
+    
+    while left < right{
+        if height[left] < height[right]{
+            leftMax = max(leftMax, height[left])
+            WaterTrapped += leftMax - height[left]
+            
+            left += 1
+        } else {
+            rightMax = max(rightMax, height[right])
+            WaterTrapped += rightMax - height[right]          
+            right -= 1
+        }
+    }
+    return WaterTrapped
+}
+// in this code we have to see that how much water will be trapped bw the bars with given height so we'll first have some variables LEFT,RIGHT,LEFTMAX,RIGHTMAX,WATERTRAPPED so after this we'll run a while loop in which as far as left < right till then it'll run. then if height of left bar is smaller than right then left max will have max values of left max and height of left then left += 1 mean pointer will go to another value else right will perform the same 
 
 
+SO OFFICIALLY we did it our first pattern
 
