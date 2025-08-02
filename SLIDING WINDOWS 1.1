@@ -1,0 +1,48 @@
+🟢 SLIDING WINDOW PATTERN — Mastery Guide (Apple Focus)
+1. What is Sliding Window?
+A technique that involves creating a “window” (range of elements) over a data structure (usually an array or string) and moving it to process contiguous segments efficiently.
+2. When to Use Sliding Window?
+Problems dealing with subarrays or substrings.
+When you need to compute metrics (sum, length, etc.) over contiguous sequences.
+When brute force O(N²) nested loops are too slow.
+Can be Fixed Window Size or Dynamic/Variable Window Size.
+3. Types of Sliding Window:
+Type	Window Size	Example Problem
+Fixed Window Size	Window remains constant	Max Sum Subarray of Size K
+Variable Window Size	Window expands/contracts	Longest Substring Without Repeating Characters
+4. Core Logic of Sliding Window:
+Fixed Size Window:
+Expand window until size k is reached.
+For every new element, slide window by 1: Add next element, Remove the element going out of the window.
+Compute result (sum, max, etc.) on the go.
+Variable Size Window:
+Expand window to include new elements.
+If a condition breaks (like duplicate characters), shrink the window from the left until condition is valid again.
+Keep track of best result found.
+5. Sliding Window is Powerful Because:
+Reduces Time Complexity from O(N²) to O(N).
+You maintain a balance between exploration (expand window) and cleanup (shrink window).
+Used in real Apple interview problems like:
+"Find the longest substring with at most K distinct characters."
+"Maximum points in a windowed range."
+6. Key Problems for Sliding Window Mastery:
+Problem Name	Type	Focus Area
+Max Sum Subarray of Size K	Fixed Size	Sum Calculations
+Longest Substring Without Repeats	Variable Size	HashMaps + Unique Conditions
+Minimum Window Subsequence	Variable Size	Shrinking to Optimal Solution
+7. Common Mistakes to Avoid:
+Not shrinking the window correctly in variable size cases.
+Off-by-one errors in window boundaries.
+Forgetting to update result after window adjustments.
+Not handling edge cases like empty arrays or small lengths.
+8. Apple-Level Application:
+Apple loves to see:
+Efficient thinking (O(N) over brute force)
+Your ability to explain WHY sliding window fits this problem.
+Clear boundary management (indices, left/right pointers).
+🔻 CODE SNIPPETS (Place this at the very end):
+// Problem 1: Max Sum Subarray of Size K
+func maxSumSubarray(_ nums: [Int], _ k: Int) -> Int { ... }
+
+// Problem 2: Longest Substring Without Repeating Characters
+func lengthOfLongestSubstring(_ s: String) -> Int { ... }
